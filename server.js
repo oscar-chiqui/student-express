@@ -1,8 +1,14 @@
 let express = require('express')
 let api_routes = require ('./routes/api.js')
+let path = require('path')
 
 //create web application
 let app = express()
+
+// the 127.0.0.1:3000 has the same web application as 127.0.0.1:8080/api/students
+
+let vueClientPath = path.join(__dirname, 'student-sign-in-client', 'dist')
+app.use(express.static(vueClientPath))
 
 // be able to handle JSON request, convert data to JavaScript
 app.use(express.json())

@@ -7,11 +7,16 @@ let router = express.Router ()
 
 // Sort the student table by present and then by StarID
 
+// Router Get :
+
 router.get('/students', function(req, res, next){
     Student.findAll({order: ['present','starID']}).then( students => {
         return res.json(students)
     }).catch( err => next(err))
 })
+
+
+// Router Post :
 
 router.post('/students', function(req, res, next){
     Student.create( req.body ).then( data => {
@@ -57,6 +62,9 @@ router.patch('/students/:id', function(req, res, next) {
     })
 })
 
+
+// Router Delete :
+
 router.delete('/students/:id', function(req, res, next ){
     let studentID = req.params.id
     Student.destroy( { where: { id: studentID }})
@@ -69,4 +77,7 @@ router.delete('/students/:id', function(req, res, next ){
         })
         .catch ( err => next(err)) // unexpected errors
 })
+
+// Module exports 
+
 module.exports = router
